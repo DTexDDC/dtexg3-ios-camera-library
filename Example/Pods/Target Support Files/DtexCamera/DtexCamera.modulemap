@@ -1,0 +1,6 @@
+framework module DtexCamera {
+  umbrella header "DtexCamera-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "DtexCamera",
+  "version": "0.1.0",
+  "summary": "A short description of DtexCamera.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/wenge8n/DtexCamera",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "wenge8n": "wenge8n@outlook.com"
+  },
+  "source": {
+    "git": "https://github.com/wenge8n/DtexCamera.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "DtexCamera/Classes/**/*"
+}
