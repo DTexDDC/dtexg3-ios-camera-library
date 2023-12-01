@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import DtexCamera
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var resultImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.title = "Example"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func launchCameraTapped(_ sender: Any) {
+        let vc = DtexCameraViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
