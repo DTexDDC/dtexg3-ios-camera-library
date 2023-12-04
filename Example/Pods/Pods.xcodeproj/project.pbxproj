@@ -43,7 +43,7 @@
 		0C118B56419546D063232DD067837A94 /* Pods-DtexCamera_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Example.release.xcconfig"; sourceTree = "<group>"; };
 		22A125718E0C8D9D1ADF5F52538F044B /* Pods-DtexCamera_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		27F033650ED5ED3B3CBFB8F2A975BABF /* DtexCamera-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DtexCamera-Info.plist"; sourceTree = "<group>"; };
-		2F780892BD0C1BE41A67F987027662ED /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; };
+		2F780892BD0C1BE41A67F987027662ED /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3744557D602CE1E22D2A472083FA3FAE /* Pods-DtexCamera_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		3FE176AB0A290325D4A8CC7E73CCB109 /* DtexCamera-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-umbrella.h"; sourceTree = "<group>"; };
 		4730D26CC29A90EAD22100F1916D4C97 /* DtexCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DtexCamera.release.xcconfig; sourceTree = "<group>"; };
@@ -55,12 +55,12 @@
 		7E38C514672994F8DEFE130DC1D08423 /* DtexCamera-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-prefix.pch"; sourceTree = "<group>"; };
 		81F2BACDA584418D5D2E561E3EF52785 /* Pods-DtexCamera_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-Info.plist"; sourceTree = "<group>"; };
 		83E698DEF8AE4C8285313813F7A7E3F1 /* DtexCamera */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DtexCamera; path = DtexCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CB848D58E47C28404E5DF37777B6895 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9020E633E4AF6550B1B21D282DCA7680 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8CB848D58E47C28404E5DF37777B6895 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		9020E633E4AF6550B1B21D282DCA7680 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		9953923E55E0570D47C1C3DCD64EF51A /* Pods-DtexCamera_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DtexCamera_Tests-dummy.m"; sourceTree = "<group>"; };
 		9AFA66B2809AE0ED4C81BE2844290BD4 /* Pods-DtexCamera_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DtexCamera_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9CA791990CF69F877EB237C7A7CC2FE2 /* Pods-DtexCamera_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A73080CA9BD53AC0D374A219A9C7ED46 /* DtexCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DtexCamera.debug.xcconfig; sourceTree = "<group>"; };
 		BC2D02E11968BB56760077D2C1AC9135 /* Pods-DtexCamera_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DtexCamera_Example-dummy.m"; sourceTree = "<group>"; };
 		CA6E8BEB8C2B9C3B4CD720EAA3B97BA8 /* Pods-DtexCamera_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -443,9 +443,9 @@
 			};
 			name = Debug;
 		};
-		0C0FC5FFC68624F68FB84065C23BF7F5 /* Debug */ = {
+		06DA63A24A8DA761B73BA4C7A4499E82 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A73080CA9BD53AC0D374A219A9C7ED46 /* DtexCamera.debug.xcconfig */;
+			baseConfigurationReference = 4730D26CC29A90EAD22100F1916D4C97 /* DtexCamera.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -459,7 +459,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DtexCamera/DtexCamera-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DtexCamera/DtexCamera-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/DtexCamera/DtexCamera.modulemap";
 				PRODUCT_MODULE_NAME = DtexCamera;
@@ -469,10 +469,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		314C36FC005BBF43381A41F10D02BA0C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -501,38 +502,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		42C92D6AEC1B8F4F3875BE7E299A2C67 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4730D26CC29A90EAD22100F1916D4C97 /* DtexCamera.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/DtexCamera/DtexCamera-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/DtexCamera/DtexCamera-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/DtexCamera/DtexCamera.modulemap";
-				PRODUCT_MODULE_NAME = DtexCamera;
-				PRODUCT_NAME = DtexCamera;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -595,7 +564,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -634,6 +604,37 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		BEDAEA8226D7309E01E2C93BE5BA1943 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A73080CA9BD53AC0D374A219A9C7ED46 /* DtexCamera.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/DtexCamera/DtexCamera-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/DtexCamera/DtexCamera-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/DtexCamera/DtexCamera.modulemap";
+				PRODUCT_MODULE_NAME = DtexCamera;
+				PRODUCT_NAME = DtexCamera;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		C57D0881762E58C945102E64DD1D5140 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -740,8 +741,8 @@
 		2A4671E425DA41E17EA9D7D8A113F6A9 /* Build configuration list for PBXNativeTarget "DtexCamera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0C0FC5FFC68624F68FB84065C23BF7F5 /* Debug */,
-				42C92D6AEC1B8F4F3875BE7E299A2C67 /* Release */,
+				BEDAEA8226D7309E01E2C93BE5BA1943 /* Debug */,
+				06DA63A24A8DA761B73BA4C7A4499E82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
