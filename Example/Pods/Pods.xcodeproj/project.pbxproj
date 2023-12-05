@@ -14,7 +14,6 @@
 		97A4C19360398AA08D4FF0AB61ABE265 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		9DDB7D772D249EEB296B50FC3E46224A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		C746BD550E878B5387F2971B874F002F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		E25769D41FD81975D897BDB2798B15DE /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80AFECD0FCC6D3334BD5CEA82C075A7 /* ReplaceMe.swift */; };
 		EA2992F0C50731A5DC1CB2159D5A9EE0 /* Pods-DtexCamera_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9953923E55E0570D47C1C3DCD64EF51A /* Pods-DtexCamera_Tests-dummy.m */; };
 		F196D23C9E30FF4472C6CE04818B852B /* Pods-DtexCamera_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB24D736951E76EDA487EFAA6F787DD8 /* Pods-DtexCamera_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F24EE073F3AE779A556AF411F1349299 /* Pods-DtexCamera_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2D02E11968BB56760077D2C1AC9135 /* Pods-DtexCamera_Example-dummy.m */; };
@@ -43,7 +42,7 @@
 		0C118B56419546D063232DD067837A94 /* Pods-DtexCamera_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Example.release.xcconfig"; sourceTree = "<group>"; };
 		22A125718E0C8D9D1ADF5F52538F044B /* Pods-DtexCamera_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		27F033650ED5ED3B3CBFB8F2A975BABF /* DtexCamera-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DtexCamera-Info.plist"; sourceTree = "<group>"; };
-		2F780892BD0C1BE41A67F987027662ED /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2F780892BD0C1BE41A67F987027662ED /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3744557D602CE1E22D2A472083FA3FAE /* Pods-DtexCamera_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		3FE176AB0A290325D4A8CC7E73CCB109 /* DtexCamera-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-umbrella.h"; sourceTree = "<group>"; };
 		4730D26CC29A90EAD22100F1916D4C97 /* DtexCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DtexCamera.release.xcconfig; sourceTree = "<group>"; };
@@ -55,12 +54,12 @@
 		7E38C514672994F8DEFE130DC1D08423 /* DtexCamera-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-prefix.pch"; sourceTree = "<group>"; };
 		81F2BACDA584418D5D2E561E3EF52785 /* Pods-DtexCamera_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-Info.plist"; sourceTree = "<group>"; };
 		83E698DEF8AE4C8285313813F7A7E3F1 /* DtexCamera */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DtexCamera; path = DtexCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CB848D58E47C28404E5DF37777B6895 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		9020E633E4AF6550B1B21D282DCA7680 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		8CB848D58E47C28404E5DF37777B6895 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		9020E633E4AF6550B1B21D282DCA7680 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9953923E55E0570D47C1C3DCD64EF51A /* Pods-DtexCamera_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DtexCamera_Tests-dummy.m"; sourceTree = "<group>"; };
 		9AFA66B2809AE0ED4C81BE2844290BD4 /* Pods-DtexCamera_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DtexCamera_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9CA791990CF69F877EB237C7A7CC2FE2 /* Pods-DtexCamera_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A73080CA9BD53AC0D374A219A9C7ED46 /* DtexCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DtexCamera.debug.xcconfig; sourceTree = "<group>"; };
 		BC2D02E11968BB56760077D2C1AC9135 /* Pods-DtexCamera_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DtexCamera_Example-dummy.m"; sourceTree = "<group>"; };
 		CA6E8BEB8C2B9C3B4CD720EAA3B97BA8 /* Pods-DtexCamera_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -70,7 +69,6 @@
 		F160A809236B47A0899E37AC020A7A73 /* Pods-DtexCamera_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F32F4B0E652C775A161EB17DBA77FF82 /* DtexCamera.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DtexCamera.modulemap; sourceTree = "<group>"; };
 		F6ACAC469FBAE6573D058382864F7F19 /* Pods-DtexCamera_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-DtexCamera_Example"; path = Pods_DtexCamera_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F80AFECD0FCC6D3334BD5CEA82C075A7 /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReplaceMe.swift; path = DtexCamera/Classes/ReplaceMe.swift; sourceTree = "<group>"; };
 		FB24D736951E76EDA487EFAA6F787DD8 /* Pods-DtexCamera_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DtexCamera_Example-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				7479554CC612FACD552A494CADFD1AF8 /* DtexCameraViewController.swift */,
-				F80AFECD0FCC6D3334BD5CEA82C075A7 /* ReplaceMe.swift */,
 				B9CCFE5C8AC1B1ACC5A5A2455C6D3C78 /* Pod */,
 				F6ED9D879464C594779FF006B133F504 /* Support Files */,
 			);
@@ -388,7 +385,6 @@
 			files = (
 				20AB4472D3E007314C9C966529173186 /* DtexCamera-dummy.m in Sources */,
 				25CB851A178A9DE67E201180B861D2F5 /* DtexCameraViewController.swift in Sources */,
-				E25769D41FD81975D897BDB2798B15DE /* ReplaceMe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,8 +560,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
