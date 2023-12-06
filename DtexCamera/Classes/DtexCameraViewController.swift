@@ -16,10 +16,18 @@ open class DtexCameraViewController: UIViewController {
     private var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     private var videoDataOutput: AVCaptureVideoDataOutput!
     private var videoDataOutputQueue: DispatchQueue!
+    
+    private var permissionGranted = false
+    private let sessionQueue = DispatchQueue(label: "session queue")
+    private let context = CIContext()
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        configureSession()
+        checkPermission()
+        sessionQueue.async {
+            self.configureSession()
+            self.captureSession.startRunning()
+        }
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
@@ -27,7 +35,27 @@ open class DtexCameraViewController: UIViewController {
         captureSession.stopRunning()
     }
     
+    private func checkPermission() {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        case .authorized:
+            permissionGranted = true
+        case .notDetermined:
+            requestPermission()
+        default:
+            permissionGranted = false
+        }
+    }
+    
+    private func requestPermission() {
+        sessionQueue.suspend()
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [unowned self] granted in
+            self.permissionGranted = granted
+            self.sessionQueue.resume()
+        }
+    }
+    
     private func configureSession() {
+        guard permissionGranted else { return }
         // Preset the session for taking photo in full resolution
         captureSession.sessionPreset = AVCaptureSession.Preset.photo
         
@@ -37,20 +65,23 @@ open class DtexCameraViewController: UIViewController {
         }
         captureDevice = device
         
+        // Configure capture device input
         guard let captureDeviceInput = try? AVCaptureDeviceInput(device: captureDevice) else {
             return
         }
-        
-        if captureSession.canAddInput(captureDeviceInput) {
-            captureSession.addInput(captureDeviceInput)
+        guard captureSession.canAddInput(captureDeviceInput) else {
+            print("[DtexCamera]: Could not add video device input")
+            return
         }
+        captureSession.addInput(captureDeviceInput)
         
         // Configure the session with the output for capturing still images
         stillImageOutput = AVCapturePhotoOutput()
-        
-        if captureSession.canAddOutput(stillImageOutput) {
-            captureSession.addOutput(stillImageOutput)
+        guard captureSession.canAddOutput(stillImageOutput) else {
+            print("[DtexCamera]: Could not add capture photo output")
+            return
         }
+        captureSession.addOutput(stillImageOutput)
         
         // Configure video data output
         videoDataOutput = AVCaptureVideoDataOutput()
@@ -60,10 +91,11 @@ open class DtexCameraViewController: UIViewController {
         let outputSettings: [String: Any] = [String(describing: kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)]
         videoDataOutput.videoSettings = outputSettings
         videoDataOutput.connection(with: .video)?.isEnabled = true
-        
-        if captureSession.canAddOutput(videoDataOutput) {
-            captureSession.addOutput(videoDataOutput)
+        guard captureSession.canAddOutput(videoDataOutput) else {
+            print("[DtexCamera]: Could not add video data output")
+            return
         }
+        captureSession.addOutput(videoDataOutput)
         
         // Provide a camera preview
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -106,5 +138,12 @@ extension DtexCameraViewController: AVCapturePhotoCaptureDelegate {
 extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // Process frame
+    }
+    
+    private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+        return UIImage(cgImage: cgImage)
     }
 }
