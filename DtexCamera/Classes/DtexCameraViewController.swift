@@ -10,6 +10,8 @@ import AVFoundation
 
 open class DtexCameraViewController: UIViewController {
     
+    private var previewView: UIView!
+    
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
     private var stillImageOutput: AVCapturePhotoOutput!
@@ -23,16 +25,34 @@ open class DtexCameraViewController: UIViewController {
 
     open override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         checkPermission()
-        sessionQueue.async {
+//        DispatchQueue.global(qos: .userInitiated).async {
             self.configureSession()
-            self.captureSession.startRunning()
-        }
+//        }
+    }
+    
+    open override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cameraPreviewLayer?.frame = previewView.bounds
     }
     
     open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         captureSession.stopRunning()
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .black
+        // Preview View
+        previewView = UIView()
+        view.addSubview(previewView)
+        previewView.translatesAutoresizingMaskIntoConstraints = false
+        previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        previewView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        NSLayoutConstraint(item: previewView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: previewView, attribute: NSLayoutConstraint.Attribute.width, multiplier: 4/3, constant: 0).isActive = true
+
     }
     
     private func checkPermission() {
@@ -85,12 +105,11 @@ open class DtexCameraViewController: UIViewController {
         
         // Configure video data output
         videoDataOutput = AVCaptureVideoDataOutput()
-        videoDataOutput.alwaysDiscardsLateVideoFrames = true
+        videoDataOutput.alwaysDiscardsLateVideoFrames = false
         videoDataOutputQueue = DispatchQueue(label: "video output queue")
         videoDataOutput.setSampleBufferDelegate(self, queue: videoDataOutputQueue)
         let outputSettings: [String: Any] = [String(describing: kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)]
         videoDataOutput.videoSettings = outputSettings
-        videoDataOutput.connection(with: .video)?.isEnabled = true
         guard captureSession.canAddOutput(videoDataOutput) else {
             print("[DtexCamera]: Could not add video data output")
             return
@@ -98,14 +117,20 @@ open class DtexCameraViewController: UIViewController {
         captureSession.addOutput(videoDataOutput)
         
         // Provide a camera preview
-        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        view.layer.addSublayer(cameraPreviewLayer!)
-        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        cameraPreviewLayer?.frame = view.layer.frame
+//        DispatchQueue.main.async {
+            self.setupPreviewLayer()
+//        }
         
         DispatchQueue.global(qos: .userInitiated).async {
             self.captureSession.startRunning()
         }
+    }
+    
+    private func setupPreviewLayer() {
+        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewView.layer.addSublayer(cameraPreviewLayer!)
+        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        cameraPreviewLayer?.frame = previewView.bounds
     }
     
     @objc func takePhoto(sender: UIButton) {
