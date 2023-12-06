@@ -11,6 +11,7 @@ import AVFoundation
 open class DtexCameraViewController: UIViewController {
     
     private var previewView: UIView!
+    private var shutterButton: KYShutterButton!
     
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
@@ -52,7 +53,18 @@ open class DtexCameraViewController: UIViewController {
         previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         previewView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         NSLayoutConstraint(item: previewView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: previewView, attribute: NSLayoutConstraint.Attribute.width, multiplier: 4/3, constant: 0).isActive = true
-
+        
+        // Shutter Button
+        shutterButton = KYShutterButton()
+        view.addSubview(shutterButton)
+        shutterButton.buttonColor = .white
+        shutterButton.setNeedsLayout()
+        shutterButton.addTarget(self, action: #selector(takePhoto), for: .touchUpInside)
+        shutterButton.translatesAutoresizingMaskIntoConstraints = false
+        shutterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        shutterButton.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        shutterButton.heightAnchor.constraint(equalTo: shutterButton.widthAnchor, multiplier: 1).isActive = true
+        shutterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     
     private func checkPermission() {
