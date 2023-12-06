@@ -57,6 +57,8 @@ open class DtexCameraViewController: UIViewController {
         videoDataOutput.alwaysDiscardsLateVideoFrames = true
         videoDataOutputQueue = DispatchQueue(label: "video output queue")
         videoDataOutput.setSampleBufferDelegate(self, queue: videoDataOutputQueue)
+        let outputSettings: [String: Any] = [String(describing: kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)]
+        videoDataOutput.videoSettings = outputSettings
         videoDataOutput.connection(with: .video)?.isEnabled = true
         
         if captureSession.canAddOutput(videoDataOutput) {
