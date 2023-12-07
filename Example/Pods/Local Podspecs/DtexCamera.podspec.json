@@ -18,5 +18,10 @@
   "platforms": {
     "ios": "12.0"
   },
-  "source_files": "DtexCamera/Classes/**/*"
+  "source_files": "DtexCamera/Classes/**/*",
+  "dependencies": {
+    "TensorFlowLiteSwift": [
+
+    ]
+  }
 }
