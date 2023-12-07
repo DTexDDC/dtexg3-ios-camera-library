@@ -11,6 +11,7 @@
 		20D89921EFA53EDDBDB125865182ECAA /* Pods-DtexCamera_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E87C6A3E317BB059A7152662758B974 /* Pods-DtexCamera_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		25CB851A178A9DE67E201180B861D2F5 /* DtexCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479554CC612FACD552A494CADFD1AF8 /* DtexCameraViewController.swift */; };
 		8260BF213F18FC2BEBAD4B0CC8F2EF6C /* DtexCamera-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FE176AB0A290325D4A8CC7E73CCB109 /* DtexCamera-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84BC0A812B221EEE00926664 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BC0A802B221EEE00926664 /* UIColor+Extension.swift */; };
 		84EE77772B20D91200D35533 /* KYShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE77762B20D91200D35533 /* KYShutterButton.swift */; };
 		97A4C19360398AA08D4FF0AB61ABE265 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		9DDB7D772D249EEB296B50FC3E46224A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
@@ -55,6 +56,7 @@
 		7E38C514672994F8DEFE130DC1D08423 /* DtexCamera-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-prefix.pch"; sourceTree = "<group>"; };
 		81F2BACDA584418D5D2E561E3EF52785 /* Pods-DtexCamera_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-Info.plist"; sourceTree = "<group>"; };
 		83E698DEF8AE4C8285313813F7A7E3F1 /* DtexCamera */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DtexCamera; path = DtexCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84BC0A802B221EEE00926664 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Extension.swift"; path = "DtexCamera/Classes/UIColor+Extension.swift"; sourceTree = "<group>"; };
 		84EE77762B20D91200D35533 /* KYShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KYShutterButton.swift; path = DtexCamera/Classes/KYShutterButton.swift; sourceTree = "<group>"; };
 		8CB848D58E47C28404E5DF37777B6895 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9020E633E4AF6550B1B21D282DCA7680 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				7479554CC612FACD552A494CADFD1AF8 /* DtexCameraViewController.swift */,
 				84EE77762B20D91200D35533 /* KYShutterButton.swift */,
+				84BC0A802B221EEE00926664 /* UIColor+Extension.swift */,
 				B9CCFE5C8AC1B1ACC5A5A2455C6D3C78 /* Pod */,
 				F6ED9D879464C594779FF006B133F504 /* Support Files */,
 			);
@@ -389,6 +392,7 @@
 				84EE77772B20D91200D35533 /* KYShutterButton.swift in Sources */,
 				20AB4472D3E007314C9C966529173186 /* DtexCamera-dummy.m in Sources */,
 				25CB851A178A9DE67E201180B861D2F5 /* DtexCameraViewController.swift in Sources */,
+				84BC0A812B221EEE00926664 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
