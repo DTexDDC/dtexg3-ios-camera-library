@@ -29,10 +29,12 @@ open class DtexCameraViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupPreviewLayer()
+        
         checkPermission()
-//        DispatchQueue.global(qos: .userInitiated).async {
+        sessionQueue.async {
             self.configureSession()
-//        }
+        }
     }
     
     open override func viewDidLayoutSubviews() {
@@ -40,8 +42,16 @@ open class DtexCameraViewController: UIViewController {
         cameraPreviewLayer?.frame = previewView.bounds
     }
     
-    open override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        sessionQueue.async {
+            guard self.permissionGranted else { return }
+            self.captureSession.startRunning()
+        }
+    }
+    
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         captureSession.stopRunning()
     }
     
@@ -66,6 +76,8 @@ open class DtexCameraViewController: UIViewController {
     
     private func configureSession() {
         guard permissionGranted else { return }
+        
+        captureSession.beginConfiguration()
         // Preset the session for taking photo in full resolution
         captureSession.sessionPreset = AVCaptureSession.Preset.photo
         
@@ -106,14 +118,7 @@ open class DtexCameraViewController: UIViewController {
         }
         captureSession.addOutput(videoDataOutput)
         
-        // Provide a camera preview
-//        DispatchQueue.main.async {
-            self.setupPreviewLayer()
-//        }
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
-        }
+        captureSession.commitConfiguration()
     }
     
     private func setupPreviewLayer() {
