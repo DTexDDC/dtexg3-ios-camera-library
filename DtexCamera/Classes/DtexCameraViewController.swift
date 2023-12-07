@@ -175,9 +175,9 @@ extension DtexCameraViewController {
         previewView = UIView()
         view.addSubview(previewView)
         previewView.translatesAutoresizingMaskIntoConstraints = false
-        previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        previewView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        previewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
+        previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
+        previewView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
         NSLayoutConstraint(item: previewView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: previewView, attribute: NSLayoutConstraint.Attribute.width, multiplier: 4/3, constant: 0).isActive = true
         
         // Shutter Button
