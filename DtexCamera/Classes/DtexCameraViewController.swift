@@ -221,13 +221,24 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             try modelInterpreter!.invoke()
             let confidenceOutput = try modelInterpreter!.output(at: 0)
             let locationsOutput = try modelInterpreter!.output(at: 1)
-            let detectionCountOutput = try modelInterpreter!.output(at: 2)
-            let categoriesOutput = try modelInterpreter!.output(at: 3)
+            // let detectionCountOutput = try modelInterpreter!.output(at: 2)
+            // let categoriesOutput = try modelInterpreter!.output(at: 3)
             
             let scores = [Float32](unsafeData: confidenceOutput.data) ?? []
             let boundingBoxes = processBoundingBoxes(input: [Float32](unsafeData: locationsOutput.data) ?? [])
-            let detectionCount = [Float32](unsafeData: detectionCountOutput.data) ?? []
-            let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
+            //let detectionCount = [Float32](unsafeData: detectionCountOutput.data) ?? []
+            //let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
+            
+            let sortedScores = scores.enumerated().sorted(by: { $0.element > $1.element }).filter{ $0.element > 0.1 }
+            let indices = sortedScores.map{ $0.offset }[..<max(5, sortedScores.count)]
+            let previewWidth = UIScreen.main.bounds.width
+            let previewHeight = previewWidth * 3 / 4
+            for index in indices {
+                let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
+                let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
+                let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
+                let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+            }
         } catch {
             print("[DtexCamera]: \(error.localizedDescription)")
         }
@@ -241,7 +252,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                 "ymin": flatBB[0],
                 "xmin": flatBB[1],
                 "ymax": flatBB[2],
-                "ymax": flatBB[2]
+                "xmax": flatBB[3]
             ])
         }
         return out
