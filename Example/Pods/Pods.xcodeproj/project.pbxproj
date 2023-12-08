@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = TensorFlowLiteC;
+			productName = TensorFlowLiteC;
 		};
 /* End PBXAggregateTarget section */
 
@@ -29,6 +30,10 @@
 		57159CBE347C4CF2D66480ACE5301284 /* TensorFlowLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2522449B7C98F47092B5FA08DE960223 /* TensorFlowLite.swift */; };
 		6BD06D006AE3FAB25F3A0C6BAA968D3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		835D0A49FA2F5F4FA96925B7D027B20B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8453EED42B22AA2E005286AB /* rgbDataFromBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453EECF2B22AA2D005286AB /* rgbDataFromBuffer.swift */; };
+		8453EED52B22AA2E005286AB /* Data+fromCVPixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453EED12B22AA2D005286AB /* Data+fromCVPixelBuffer.swift */; };
+		8453EED62B22AA2E005286AB /* CVPixelBuffer+resized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453EED22B22AA2D005286AB /* CVPixelBuffer+resized.swift */; };
+		8453EED72B22AA2E005286AB /* Array+chunked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453EED32B22AA2D005286AB /* Array+chunked.swift */; };
 		89D5D89F6E452A557926F34B502B7838 /* DtexCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E94830B6E43CFDAC8BBFF2C8177945 /* DtexCameraViewController.swift */; };
 		934A38109647AA52428D2B460014E902 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		9F1DC685961AF3A8F0EF5ADFCAE17D61 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAEC7E70114144F6C69CA4FBFB204EA2 /* UIColor+Extension.swift */; };
@@ -94,9 +99,9 @@
 		07B438EC4D0CF999A7F94D8FDF401F47 /* Pods-DtexCamera_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		0913DC467F75C7CDF2AE04C72B69A1FB /* InterpreterError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InterpreterError.swift; path = tensorflow/lite/swift/Sources/InterpreterError.swift; sourceTree = "<group>"; };
 		09D90D0FDED0DC064BD35F12F4F7E546 /* Pods-DtexCamera_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DtexCamera_Example.modulemap"; sourceTree = "<group>"; };
-		0B7FB0B1E3011F3B2CFDC987114C6916 /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0B7FB0B1E3011F3B2CFDC987114C6916 /* DtexCamera.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DtexCamera.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		1142A68AB5B9CB167CAEBF95340116B3 /* Pods-DtexCamera_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Example-Info.plist"; sourceTree = "<group>"; };
-		1362EFF840CA016CE6944A341A5FBF4C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		1362EFF840CA016CE6944A341A5FBF4C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2522449B7C98F47092B5FA08DE960223 /* TensorFlowLite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TensorFlowLite.swift; path = tensorflow/lite/swift/Sources/TensorFlowLite.swift; sourceTree = "<group>"; };
 		28C1063AEAB9221745A5095D0A5CB58B /* TensorFlowLiteC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TensorFlowLiteC.release.xcconfig; sourceTree = "<group>"; };
 		30313FFA504750EFE8D97F2DA2E6245D /* Pods-DtexCamera_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,7 +110,7 @@
 		4461B98DBB1E20D0DECF16F457EE06BB /* DtexCamera-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DtexCamera-Info.plist"; sourceTree = "<group>"; };
 		4D1AFED645597A50A51B22A826CA518D /* Pods-DtexCamera_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DtexCamera_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5020473EE9D89E592A73691B95B8A86A /* Pods-DtexCamera_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		5481E2458468A24131782EE0D01FF867 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		5481E2458468A24131782EE0D01FF867 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		561F721947FF13763E2BFBD88E1D17D4 /* Model.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Model.swift; path = tensorflow/lite/swift/Sources/Model.swift; sourceTree = "<group>"; };
 		5B8AF12379FD10E1EACC72D7A8A922FB /* DtexCamera-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DtexCamera-dummy.m"; sourceTree = "<group>"; };
 		673012A4B40F39FF26E603A10DC256DD /* Pods-DtexCamera_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DtexCamera_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -117,10 +122,14 @@
 		8098902C2ACCD4CC4AC2FC55DDBEB689 /* DtexCamera.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = DtexCamera.modulemap; sourceTree = "<group>"; };
 		80B58F1E1746E350BEB337CA9F756D65 /* TensorFlowLiteSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TensorFlowLiteSwift.debug.xcconfig; sourceTree = "<group>"; };
 		83E698DEF8AE4C8285313813F7A7E3F1 /* DtexCamera */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DtexCamera; path = DtexCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8453EECF2B22AA2D005286AB /* rgbDataFromBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rgbDataFromBuffer.swift; sourceTree = "<group>"; };
+		8453EED12B22AA2D005286AB /* Data+fromCVPixelBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+fromCVPixelBuffer.swift"; sourceTree = "<group>"; };
+		8453EED22B22AA2D005286AB /* CVPixelBuffer+resized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+resized.swift"; sourceTree = "<group>"; };
+		8453EED32B22AA2D005286AB /* Array+chunked.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+chunked.swift"; sourceTree = "<group>"; };
 		93DA0A314EC5E47E93BBE5BD67A566AE /* DtexCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DtexCamera.debug.xcconfig; sourceTree = "<group>"; };
 		95AF8B70832AC786D25547BE83582636 /* TensorFlowLiteC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TensorFlowLiteC.debug.xcconfig; sourceTree = "<group>"; };
 		96D68ABE7A97CE570CBFFCE35CD6E289 /* KYShutterButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KYShutterButton.swift; path = DtexCamera/Classes/KYShutterButton.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A6DA35BC435382D5F52631554D02B10E /* DtexCamera-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DtexCamera-umbrella.h"; sourceTree = "<group>"; };
 		A8E0D36C4741F2B35807DD9EE05D4309 /* Pods-DtexCamera_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DtexCamera_Tests-Info.plist"; sourceTree = "<group>"; };
 		AC0AF6C281911B37E06EE0AA8A488B9B /* Pods-DtexCamera_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DtexCamera_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -244,7 +253,6 @@
 				4585CF3ECE5F665A5620382136CB39B4 /* Core */,
 				7883D61179A120721C8404E382EF620A /* Support Files */,
 			);
-			name = TensorFlowLiteC;
 			path = TensorFlowLiteC;
 			sourceTree = "<group>";
 		};
@@ -304,6 +312,26 @@
 			path = "../Target Support Files/TensorFlowLiteC";
 			sourceTree = "<group>";
 		};
+		8453EECE2B22AA2D005286AB /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8453EECF2B22AA2D005286AB /* rgbDataFromBuffer.swift */,
+			);
+			name = utils;
+			path = DtexCamera/Classes/utils;
+			sourceTree = "<group>";
+		};
+		8453EED02B22AA2D005286AB /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8453EED12B22AA2D005286AB /* Data+fromCVPixelBuffer.swift */,
+				8453EED22B22AA2D005286AB /* CVPixelBuffer+resized.swift */,
+				8453EED32B22AA2D005286AB /* Array+chunked.swift */,
+			);
+			name = extensions;
+			path = DtexCamera/Classes/extensions;
+			sourceTree = "<group>";
+		};
 		ACB8A211BE5F23B085FDA9D3B3A1F3E8 /* Pods-DtexCamera_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +354,8 @@
 				E2E94830B6E43CFDAC8BBFF2C8177945 /* DtexCameraViewController.swift */,
 				96D68ABE7A97CE570CBFFCE35CD6E289 /* KYShutterButton.swift */,
 				BAEC7E70114144F6C69CA4FBFB204EA2 /* UIColor+Extension.swift */,
+				8453EED02B22AA2D005286AB /* extensions */,
+				8453EECE2B22AA2D005286AB /* utils */,
 				F1E6277D124DB1839BF7EE546A907E82 /* Pod */,
 				1FC9E420E88BA5EA8E97A6C57375E21B /* Support Files */,
 			);
@@ -339,7 +369,6 @@
 				75B402B1BE50C8CEB29BAC109041FE6A /* Core */,
 				7170AAEA90A9F81D73AF9FEC2F47F645 /* Support Files */,
 			);
-			name = TensorFlowLiteSwift;
 			path = TensorFlowLiteSwift;
 			sourceTree = "<group>";
 		};
@@ -582,8 +611,12 @@
 			files = (
 				D96F68C084BDD8BDD68CE52D57F1859C /* DtexCamera-dummy.m in Sources */,
 				89D5D89F6E452A557926F34B502B7838 /* DtexCameraViewController.swift in Sources */,
+				8453EED72B22AA2E005286AB /* Array+chunked.swift in Sources */,
+				8453EED62B22AA2E005286AB /* CVPixelBuffer+resized.swift in Sources */,
 				B5844A4C0914B5E95C811E5E9A0BB727 /* KYShutterButton.swift in Sources */,
+				8453EED42B22AA2E005286AB /* rgbDataFromBuffer.swift in Sources */,
 				9F1DC685961AF3A8F0EF5ADFCAE17D61 /* UIColor+Extension.swift in Sources */,
+				8453EED52B22AA2E005286AB /* Data+fromCVPixelBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -866,8 +899,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
