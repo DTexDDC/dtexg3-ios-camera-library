@@ -18,6 +18,7 @@ open class DtexCameraViewController: UIViewController {
     private var shutterButton: KYShutterButton!
     private var reviewView: UIView!
     private var stillImageView: UIImageView!
+    private var canvasImageView: UIImageView!
     
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
@@ -230,14 +231,32 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             //let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
             
             let sortedScores = scores.enumerated().sorted(by: { $0.element > $1.element }).filter{ $0.element > 0.1 }
-            let indices = sortedScores.map{ $0.offset }[..<max(5, sortedScores.count)]
+            let indices = sortedScores.map{ $0.offset }
             let previewWidth = UIScreen.main.bounds.width
             let previewHeight = previewWidth * 3 / 4
-            for index in indices {
-                let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
-                let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
-                let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
-                let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+            DispatchQueue.main.async {
+                self.canvasImageView.image = nil
+                let renderer = UIGraphicsImageRenderer(size: self.canvasImageView.bounds.size)
+                let image = renderer.image { ctx in
+                    ctx.cgContext.setStrokeColor(UIColor.systemGreen.cgColor)
+                    ctx.cgContext.setLineWidth(3)
+                    
+                    for index in indices[0..<min(5, indices.count)] {
+                        let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
+                        let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
+                        let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
+                        let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+                        
+                        ctx.cgContext.move(to: CGPoint(x: xmin, y: ymin))
+                        ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymin))
+                        ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymax))
+                        ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymax))
+                        ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymin))
+                        
+                        ctx.cgContext.drawPath(using: .stroke)
+                    }
+                }
+                self.canvasImageView.image = image
             }
         } catch {
             print("[DtexCamera]: \(error.localizedDescription)")
@@ -277,6 +296,11 @@ extension DtexCameraViewController {
         previewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         previewView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: 0).isActive = true
         NSLayoutConstraint(item: previewView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: previewView, attribute: NSLayoutConstraint.Attribute.width, multiplier: 4/3, constant: 0).isActive = true
+        
+        // Canvas ImageView
+        canvasImageView = UIImageView()
+        view.addSubview(canvasImageView)
+        canvasImageView.translatesAutoresizingMaskIntoConstraints = false
         
         // Shutter Button
         shutterButton = KYShutterButton()
@@ -323,6 +347,11 @@ extension DtexCameraViewController {
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            canvasImageView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
+            canvasImageView.topAnchor.constraint(equalTo: previewView.topAnchor),
+            canvasImageView.trailingAnchor.constraint(equalTo: previewView.trailingAnchor),
+            canvasImageView.bottomAnchor.constraint(equalTo: previewView.bottomAnchor),
+            
             reviewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             reviewView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             reviewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
