@@ -32,12 +32,23 @@ open class DtexCameraViewController: UIViewController {
     
     private let inputSize = 512
     private var modelInterpreter: Interpreter?
+    
+    lazy var resourceBundle: Bundle = {
+        let frameworkBundle = Bundle(for: DtexCameraViewController.self)
+        guard let resourceBundleURL = frameworkBundle.url(forResource: "DtexCamera", withExtension: "bundle") else {
+            fatalError("[DtexCamera]: DtexCamera.bundle not found")
+        }
+        guard let resourceBundle = Bundle(url: resourceBundleURL) else {
+            fatalError("[DtexCamera]: Cannot access DtexCamera.bundle")
+        }
+        return resourceBundle
+    }()
 
     open override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupPreviewLayer()
-        configureModel(path: "")
+        configureModel()
         
         checkPermission()
         sessionQueue.async {
@@ -145,11 +156,11 @@ open class DtexCameraViewController: UIViewController {
         stillImageOutput.capturePhoto(with: photoSettings, delegate: self)
     }
     
-    private func configureModel(path: String) {
-        if let uri = URL(string: path) {
+    private func configureModel() {
+        if let url = resourceBundle.url(forResource: "ireland_shelf", withExtension: "tflite") {
             do {
-                print("Loading model with path \(uri.path)")
-                let interpreter = try Interpreter(modelPath: uri.path)
+                print("Loading model with path \(url.path)")
+                let interpreter = try Interpreter(modelPath: url.path)
                 try interpreter.allocateTensors()
                 modelInterpreter = interpreter
             } catch {
