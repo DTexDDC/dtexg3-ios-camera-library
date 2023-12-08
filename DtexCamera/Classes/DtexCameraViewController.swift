@@ -165,7 +165,7 @@ open class DtexCameraViewController: UIViewController {
     }
     
     private func configureModel() {
-        if let url = resourceBundle.url(forResource: "ireland_shelf", withExtension: "tflite") {
+        if let url = resourceBundle.url(forResource: "boards", withExtension: "tflite") {
             do {
                 print("Loading model with path \(url.path)")
                 let interpreter = try Interpreter(modelPath: url.path)
