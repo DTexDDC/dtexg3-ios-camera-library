@@ -20,6 +20,37 @@ it, simply add the following line to your Podfile:
 pod 'DtexCamera'
 ```
 
+## Usage
+````
+import UIKit
+import DtexCamera
+
+class ViewController: UIViewController, DtexCameraViewControllerDelegate {
+
+    @IBOutlet weak var resultImageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func launchCameraTapped(_ sender: Any) {
+        let vc = DtexCameraViewController()
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage) {
+        resultImageView.image = photo
+    }
+
+}
+````
+
 ## Author
 
 wenge8n, wenge8n@outlook.com
