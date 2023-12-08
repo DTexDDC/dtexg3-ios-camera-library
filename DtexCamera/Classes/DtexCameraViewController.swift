@@ -12,6 +12,10 @@ import Vision
 import TensorFlowLite
 import Accelerate
 
+public protocol DtexCameraViewControllerDelegate: class {
+    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage)
+}
+
 open class DtexCameraViewController: UIViewController {
     
     private var previewView: UIView!
@@ -22,6 +26,7 @@ open class DtexCameraViewController: UIViewController {
     
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
+    private var stillImage: UIImage?
     private var stillImageOutput: AVCapturePhotoOutput!
     private var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     private var videoDataOutput: AVCaptureVideoDataOutput!
@@ -33,6 +38,8 @@ open class DtexCameraViewController: UIViewController {
     
     private let inputSize = 512
     private var modelInterpreter: Interpreter?
+    
+    public weak var delegate: DtexCameraViewControllerDelegate?
     
     lazy var resourceBundle: Bundle = {
         let frameworkBundle = Bundle(for: DtexCameraViewController.self)
@@ -183,7 +190,8 @@ extension DtexCameraViewController: AVCapturePhotoCaptureDelegate {
             return
         }
         
-        stillImageView.image = UIImage(data: imageData)
+        stillImage = UIImage(data: imageData)
+        stillImageView.image = stillImage
         reviewView.isHidden = false
     }
 }
@@ -383,6 +391,9 @@ extension DtexCameraViewController {
     }
     
     @objc func doneTapped(sender: UIButton) {
+        if let image = stillImage {
+            delegate?.dtexCamera(self, didTake: image)
+        }
         navigationController?.popViewController(animated: true)
     }
 }

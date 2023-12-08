@@ -9,7 +9,7 @@
 import UIKit
 import DtexCamera
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DtexCameraViewControllerDelegate {
 
     @IBOutlet weak var resultImageView: UIImageView!
     
@@ -25,7 +25,12 @@ class ViewController: UIViewController {
     
     @IBAction func launchCameraTapped(_ sender: Any) {
         let vc = DtexCameraViewController()
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage) {
+        resultImageView.image = photo
     }
 
 }
