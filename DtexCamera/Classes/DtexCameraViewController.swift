@@ -7,6 +7,10 @@
 
 import UIKit
 import AVFoundation
+import Foundation
+import Vision
+import TensorFlowLite
+import Accelerate
 
 open class DtexCameraViewController: UIViewController {
     
@@ -25,11 +29,15 @@ open class DtexCameraViewController: UIViewController {
     private var permissionGranted = false
     private let sessionQueue = DispatchQueue(label: "session queue")
     private let context = CIContext()
+    
+    private let inputSize = 512
+    private var modelInterpreter: Interpreter?
 
     open override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupPreviewLayer()
+        configureModel(path: "")
         
         checkPermission()
         sessionQueue.async {
@@ -136,6 +144,19 @@ open class DtexCameraViewController: UIViewController {
         stillImageOutput.isHighResolutionCaptureEnabled = true
         stillImageOutput.capturePhoto(with: photoSettings, delegate: self)
     }
+    
+    private func configureModel(path: String) {
+        if let uri = URL(string: path) {
+            do {
+                print("Loading model with path \(uri.path)")
+                let interpreter = try Interpreter(modelPath: uri.path)
+                try interpreter.allocateTensors()
+                modelInterpreter = interpreter
+            } catch {
+                print("[DtexCamera]: \(error.localizedDescription)")
+            }
+        }
+    }
 
 }
 
@@ -158,6 +179,61 @@ extension DtexCameraViewController: AVCapturePhotoCaptureDelegate {
 extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // Process frame
+        guard modelInterpreter != nil else {
+            return
+        }
+        
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+        
+        do {
+            let inputTensor = try modelInterpreter!.input(at: 0)
+            
+            // Crops the image to the biggest square in the center and scales it down to model dimensions.
+            let scaledSize = CGSize(width: inputSize, height: inputSize)
+            guard let scaledPixelBuffer = imageBuffer.resized(to: scaledSize) else {
+                return
+            }
+            
+            guard let inputData = rgbDataFromBuffer(
+                scaledPixelBuffer,
+                byteCount: 1 * inputSize * inputSize * 3,
+                isModelQuantized: inputTensor.dataType == .uInt8
+            ) else {
+                print("[DtexCamera]: Failed to convert image buffer to RGB data")
+                return
+            }
+            
+            // Copy RGB data to input `Tensor`
+            try modelInterpreter!.copy(inputData, toInputAt: 0)
+            try modelInterpreter!.invoke()
+            let confidenceOutput = try modelInterpreter!.output(at: 0)
+            let locationsOutput = try modelInterpreter!.output(at: 1)
+            let detectionCountOutput = try modelInterpreter!.output(at: 2)
+            let categoriesOutput = try modelInterpreter!.output(at: 3)
+            
+            let scores = [Float32](unsafeData: confidenceOutput.data) ?? []
+            let boundingBoxes = processBoundingBoxes(input: [Float32](unsafeData: locationsOutput.data) ?? [])
+            let detectionCount = [Float32](unsafeData: detectionCountOutput.data) ?? []
+            let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
+        } catch {
+            print("[DtexCamera]: \(error.localizedDescription)")
+        }
+    }
+    
+    private func processBoundingBoxes(input: [Float32]) -> [Dictionary<String, Float32>] {
+        let flatBBs = input.chunked(by: 4)
+        var out: [Dictionary<String, Float32>] = []
+        for flatBB in flatBBs {
+            out.append([
+                "ymin": flatBB[0],
+                "xmin": flatBB[1],
+                "ymax": flatBB[2],
+                "ymax": flatBB[2]
+            ])
+        }
+        return out
     }
     
     private func imageFromSampleBuffer(sampleBuffer: CMSampleBuffer) -> UIImage? {
