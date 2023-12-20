@@ -11,6 +11,7 @@ import Foundation
 import Vision
 import TensorFlowLite
 import Accelerate
+import CoreMotion
 
 public protocol DtexCameraViewControllerDelegate: class {
     func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage)
@@ -23,6 +24,7 @@ open class DtexCameraViewController: UIViewController {
     private var reviewView: UIView!
     private var stillImageView: UIImageView!
     private var canvasImageView: UIImageView!
+    private var rotationLabel: UILabel!
     
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
@@ -41,6 +43,13 @@ open class DtexCameraViewController: UIViewController {
     
     public var modelPath: String?
     public weak var delegate: DtexCameraViewControllerDelegate?
+    
+    private let motionManager: CMMotionManager = {
+        let manager = CMMotionManager()
+        manager.deviceMotionUpdateInterval = 0.1
+        return manager
+    }()
+    private var rotation: Double = 0.0
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +74,21 @@ open class DtexCameraViewController: UIViewController {
             guard self.permissionGranted else { return }
             self.captureSession.startRunning()
         }
+        motionManager.startDeviceMotionUpdates(to: .main) { (motion, error) in
+            // Handle device motion updates
+            guard let motion else { return }
+            let attitude = motion.attitude
+            self.rotation = attitude.pitch
+            self.rotationLabel.text = "Rotation: \(self.rotation)"
+        }
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         captureSession.stopRunning()
+        if motionManager.isDeviceMotionActive {
+            motionManager.stopDeviceMotionUpdates()
+        }
     }
     
     private func checkPermission() {
@@ -342,6 +361,10 @@ extension DtexCameraViewController {
         buttonsView.addSubview(doneButton)
         doneButton.translatesAutoresizingMaskIntoConstraints = false
         
+        rotationLabel = UILabel()
+        view.addSubview(rotationLabel)
+        rotationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             canvasImageView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
             canvasImageView.topAnchor.constraint(equalTo: previewView.topAnchor),
@@ -369,7 +392,10 @@ extension DtexCameraViewController {
             
             doneButton.trailingAnchor.constraint(equalTo: buttonsView.trailingAnchor, constant: -8),
             doneButton.centerYAnchor.constraint(equalTo: buttonsView.centerYAnchor),
-            doneButton.heightAnchor.constraint(equalToConstant: 50)
+            doneButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            rotationLabel.leadingAnchor.constraint(equalTo: previewView.leadingAnchor, constant: 20),
+            rotationLabel.topAnchor.constraint(equalTo: previewView.topAnchor, constant: 20)
         ])
         reviewView.isHidden = true
     }
