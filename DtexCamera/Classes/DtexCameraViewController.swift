@@ -17,6 +17,8 @@ public protocol DtexCameraViewControllerDelegate: class {
     func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage)
 }
 
+private let GRAVITY = 9.80665
+
 open class DtexCameraViewController: UIViewController {
     
     private var previewView: UIView!
