@@ -39,18 +39,8 @@ open class DtexCameraViewController: UIViewController {
     private let inputSize = 512
     private var modelInterpreter: Interpreter?
     
+    public var modelPath: String?
     public weak var delegate: DtexCameraViewControllerDelegate?
-    
-    lazy var resourceBundle: Bundle = {
-        let frameworkBundle = Bundle(for: DtexCameraViewController.self)
-        guard let resourceBundleURL = frameworkBundle.url(forResource: "DtexCamera", withExtension: "bundle") else {
-            fatalError("[DtexCamera]: DtexCamera.bundle not found")
-        }
-        guard let resourceBundle = Bundle(url: resourceBundleURL) else {
-            fatalError("[DtexCamera]: Cannot access DtexCamera.bundle")
-        }
-        return resourceBundle
-    }()
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,15 +155,13 @@ open class DtexCameraViewController: UIViewController {
     }
     
     private func configureModel() {
-        if let url = resourceBundle.url(forResource: "boards", withExtension: "tflite") {
-            do {
-                print("Loading model with path \(url.path)")
-                let interpreter = try Interpreter(modelPath: url.path)
-                try interpreter.allocateTensors()
-                modelInterpreter = interpreter
-            } catch {
-                print("[DtexCamera]: \(error.localizedDescription)")
-            }
+        guard modelPath != nil else { return }
+        do {
+            let interpreter = try Interpreter(modelPath: modelPath!)
+            try interpreter.allocateTensors()
+            modelInterpreter = interpreter
+        } catch {
+            print("[DtexCamera]: \(error.localizedDescription)")
         }
     }
 
