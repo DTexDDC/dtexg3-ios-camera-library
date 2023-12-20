@@ -27,6 +27,7 @@ open class DtexCameraViewController: UIViewController {
     private var stillImageView: UIImageView!
     private var canvasImageView: UIImageView!
     private var rotationLabel: UILabel!
+    private var accelerationLabel: UILabel!
     
     private let captureSession = AVCaptureSession()
     private var captureDevice: AVCaptureDevice!
@@ -52,6 +53,10 @@ open class DtexCameraViewController: UIViewController {
         return manager
     }()
     private var rotation: Double = 0.0
+    private var accel: Double = 0.0
+    private var accelCurrent: Double = GRAVITY
+    private var accelLast: Double = GRAVITY
+    private var acceleration: Double = 0.0
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +87,17 @@ open class DtexCameraViewController: UIViewController {
             let attitude = motion.attitude
             self.rotation = attitude.pitch
             self.rotationLabel.text = "Rotation: \(self.rotation)"
+            
+            let userAcceleration = motion.userAcceleration
+            let x = (userAcceleration.x + motion.gravity.x) * GRAVITY
+            let y = (userAcceleration.y + motion.gravity.y) * GRAVITY
+            let z = (userAcceleration.z + motion.gravity.z) * GRAVITY
+            self.accelLast = self.accelCurrent
+            self.accelCurrent = sqrt(x * x + y * y + z * z)
+            let delta = self.accelCurrent - self.accelLast
+            self.accel = self.accel * 0.9 + delta
+            self.acceleration = self.accel
+            self.accelerationLabel.text = "Acceleration: \(self.acceleration)"
         }
     }
     
@@ -367,6 +383,10 @@ extension DtexCameraViewController {
         view.addSubview(rotationLabel)
         rotationLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        accelerationLabel = UILabel()
+        view.addSubview(accelerationLabel)
+        accelerationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             canvasImageView.leadingAnchor.constraint(equalTo: previewView.leadingAnchor),
             canvasImageView.topAnchor.constraint(equalTo: previewView.topAnchor),
@@ -397,7 +417,10 @@ extension DtexCameraViewController {
             doneButton.heightAnchor.constraint(equalToConstant: 50),
             
             rotationLabel.leadingAnchor.constraint(equalTo: previewView.leadingAnchor, constant: 20),
-            rotationLabel.topAnchor.constraint(equalTo: previewView.topAnchor, constant: 20)
+            rotationLabel.topAnchor.constraint(equalTo: previewView.topAnchor, constant: 20),
+            
+            accelerationLabel.leadingAnchor.constraint(equalTo: rotationLabel.leadingAnchor),
+            accelerationLabel.topAnchor.constraint(equalTo: rotationLabel.bottomAnchor, constant: 16)
         ])
         reviewView.isHidden = true
     }
