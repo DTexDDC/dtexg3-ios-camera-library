@@ -20,11 +20,6 @@
     "ios": "12.0"
   },
   "source_files": "DtexCamera/Classes/**/*",
-  "resource_bundles": {
-    "DtexCamera": [
-      "DtexCamera/Assets/*.tflite"
-    ]
-  },
   "static_framework": true,
   "dependencies": {
     "TensorFlowLiteSwift": [
