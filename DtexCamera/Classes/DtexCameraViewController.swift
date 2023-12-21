@@ -266,12 +266,22 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             let confidenceOutput = try modelInterpreter!.output(at: 0)
             let locationsOutput = try modelInterpreter!.output(at: 1)
             // let detectionCountOutput = try modelInterpreter!.output(at: 2)
-            // let categoriesOutput = try modelInterpreter!.output(at: 3)
+            let categoriesOutput = try modelInterpreter!.output(at: 3)
             
             let scores = [Float32](unsafeData: confidenceOutput.data) ?? []
             let boundingBoxes = processBoundingBoxes(input: [Float32](unsafeData: locationsOutput.data) ?? [])
             //let detectionCount = [Float32](unsafeData: detectionCountOutput.data) ?? []
-            //let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
+            let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
+            
+            let indexedScores = scores.enumerated().map { (index, value) in
+                return ["index": index, "value": value]
+            }
+            let groupedScores = Dictionary(grouping: indexedScores, by: { categories[$0["index"] as! Int] })
+                .map { $0.value }
+                .sorted {
+                    $0.map { $0["value"] as! Float32 }.max()! > $1.map { $0["value"] as! Float32 }.max()!
+                }
+            let slicedScores = groupedScores[..<min(5, groupedScores.count)]
             
             let sortedScores = scores.enumerated().sorted(by: { $0.element > $1.element }).filter{ $0.element > 0.1 }
             let indices = sortedScores.map{ $0.offset }
