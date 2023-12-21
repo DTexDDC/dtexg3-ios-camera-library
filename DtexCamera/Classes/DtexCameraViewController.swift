@@ -18,6 +18,7 @@ public protocol DtexCameraViewControllerDelegate: class {
 }
 
 private let GRAVITY = 9.80665
+private let BOUNDING_COLORS = ["#ff4500ff", "#7eda3bff", "#ffff00ff", "#990099ff", "#ff7f50ff"]
 
 open class DtexCameraViewController: UIViewController {
     
@@ -273,40 +274,45 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             //let detectionCount = [Float32](unsafeData: detectionCountOutput.data) ?? []
             let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
             
-            let indexedScores = scores.enumerated().map { (index, value) in
-                return ["index": index, "value": value]
-            }
-            let groupedScores = Dictionary(grouping: indexedScores, by: { categories[$0["index"] as! Int] })
-                .map { $0.value }
-                .sorted {
-                    $0.map { $0["value"] as! Float32 }.max()! > $1.map { $0["value"] as! Float32 }.max()!
-                }
-            let slicedScores = groupedScores[..<min(5, groupedScores.count)]
-            
-            let sortedScores = scores.enumerated().sorted(by: { $0.element > $1.element }).filter{ $0.element > 0.1 }
-            let indices = sortedScores.map{ $0.offset }
             let previewWidth = UIScreen.main.bounds.width
             let previewHeight = previewWidth * 3 / 4
             DispatchQueue.main.async {
                 self.canvasImageView.image = nil
                 let renderer = UIGraphicsImageRenderer(size: self.canvasImageView.bounds.size)
                 let image = renderer.image { ctx in
-                    ctx.cgContext.setStrokeColor(UIColor.systemGreen.cgColor)
                     ctx.cgContext.setLineWidth(3)
+                    let indexedScores = scores.enumerated().map { (index, value) in
+                        return ["index": index, "value": value]
+                    }
+                    let groupedScores = Dictionary(grouping: indexedScores, by: { categories[$0["index"] as! Int] })
+                        .map { $0.value }
+                        .sorted {
+                            $0.map { $0["value"] as! Float32 }.max()! > $1.map { $0["value"] as! Float32 }.max()!
+                        }
+                    let slicedScores = groupedScores[..<min(5, groupedScores.count)]
                     
-                    for index in indices[0..<min(5, indices.count)] {
-                        let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
-                        let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
-                        let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
-                        let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+                    for (groupIndex, groupValue) in slicedScores.enumerated() {
+                        ctx.cgContext.setStrokeColor(UIColor(hex: BOUNDING_COLORS[groupIndex])!.cgColor)
                         
-                        ctx.cgContext.move(to: CGPoint(x: xmin, y: ymin))
-                        ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymin))
-                        ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymax))
-                        ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymax))
-                        ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymin))
-                        
-                        ctx.cgContext.drawPath(using: .stroke)
+                        let sortedGroup = groupValue
+                            .filter { $0["value"] as! Float32 > 0.1 }
+                            .sorted { $0["value"] as! Float32 > $1["value"] as! Float32 }
+                        let slicedGroup = sortedGroup[..<min(5, sortedGroup.count)]
+                        slicedGroup.forEach {
+                            let index = $0["index"] as! Int
+                            let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
+                            let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
+                            let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
+                            let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+                            
+                            ctx.cgContext.move(to: CGPoint(x: xmin, y: ymin))
+                            ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymin))
+                            ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymax))
+                            ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymax))
+                            ctx.cgContext.addLine(to: CGPoint(x: xmin, y: ymin))
+                            
+                            ctx.cgContext.drawPath(using: .stroke)
+                        }
                     }
                 }
                 self.canvasImageView.image = image
