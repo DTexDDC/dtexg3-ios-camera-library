@@ -23,6 +23,7 @@ open class DtexCameraViewController: UIViewController {
     
     private var previewView: UIView!
     private var shutterButton: KYShutterButton!
+    private var detectionStatusView: UIView!
     private var reviewView: UIView!
     private var stillImageView: UIImageView!
     private var canvasImageView: UIImageView!
@@ -57,6 +58,12 @@ open class DtexCameraViewController: UIViewController {
     private var accelCurrent: Double = GRAVITY
     private var accelLast: Double = GRAVITY
     private var acceleration: Double = 0.0
+    private var isAcceptable: Bool {
+        let orientation = getDeviceOrientation()
+        return orientation == 0 && isBoundingDetected && rotation > 0.5 && acceleration < 3
+    }
+    private var isBoundingDetected = false
+    private var lastAcceptable: Bool = false
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +80,7 @@ open class DtexCameraViewController: UIViewController {
     open override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cameraPreviewLayer?.frame = previewView.bounds
+        detectionStatusView.layer.cornerRadius = detectionStatusView.bounds.size.width / 2
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -98,6 +106,8 @@ open class DtexCameraViewController: UIViewController {
             self.accel = self.accel * 0.9 + delta
             self.acceleration = self.accel
             self.accelerationLabel.text = "Acceleration: \(self.acceleration)"
+            
+            self.updateStatusView()
         }
     }
     
@@ -347,6 +357,12 @@ extension DtexCameraViewController {
         shutterButton.heightAnchor.constraint(equalTo: shutterButton.widthAnchor, multiplier: 1).isActive = true
         shutterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         
+        // DetectionStatus View
+        detectionStatusView = UIView()
+        view.addSubview(detectionStatusView)
+        detectionStatusView.backgroundColor = .systemRed
+        detectionStatusView.translatesAutoresizingMaskIntoConstraints = false
+        
         // Review View
         reviewView = UIView()
         reviewView.backgroundColor = .black
@@ -393,6 +409,11 @@ extension DtexCameraViewController {
             canvasImageView.trailingAnchor.constraint(equalTo: previewView.trailingAnchor),
             canvasImageView.bottomAnchor.constraint(equalTo: previewView.bottomAnchor),
             
+            detectionStatusView.widthAnchor.constraint(equalToConstant: 32),
+            detectionStatusView.heightAnchor.constraint(equalTo: detectionStatusView.widthAnchor, multiplier: 1),
+            detectionStatusView.centerYAnchor.constraint(equalTo: shutterButton.centerYAnchor),
+            detectionStatusView.trailingAnchor.constraint(equalTo: shutterButton.leadingAnchor, constant: -30),
+            
             reviewView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             reviewView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             reviewView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -434,5 +455,13 @@ extension DtexCameraViewController {
             delegate?.dtexCamera(self, didTake: image)
         }
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func updateStatusView() {
+        if isAcceptable {
+            detectionStatusView.backgroundColor = .systemGreen
+        } else {
+            detectionStatusView.backgroundColor = .systemRed
+        }
     }
 }
