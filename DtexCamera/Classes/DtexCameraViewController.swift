@@ -61,7 +61,7 @@ open class DtexCameraViewController: UIViewController {
     private var acceleration: Double = 0.0
     private var isAcceptable: Bool {
         let orientation = getDeviceOrientation()
-        return orientation == 0 && isBoundingDetected && rotation > 0.5 && acceleration < 3
+        return orientation == 0 && isBoundingDetected && rotation > 0.5 && acceleration < 0.3
     }
     private var isBoundingDetected = false
     private var lastAcceptable: Bool = false
@@ -198,6 +198,7 @@ open class DtexCameraViewController: UIViewController {
         photoSettings.isHighResolutionPhotoEnabled = true
         photoSettings.flashMode = .auto
         
+        lastAcceptable = isAcceptable
         stillImageOutput.isHighResolutionCaptureEnabled = true
         stillImageOutput.capturePhoto(with: photoSettings, delegate: self)
     }
@@ -277,6 +278,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             let previewWidth = UIScreen.main.bounds.width
             let previewHeight = previewWidth * 3 / 4
             DispatchQueue.main.async {
+                self.isBoundingDetected = false
                 self.canvasImageView.image = nil
                 let renderer = UIGraphicsImageRenderer(size: self.canvasImageView.bounds.size)
                 let image = renderer.image { ctx in
@@ -299,6 +301,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                             .sorted { $0["value"] as! Float32 > $1["value"] as! Float32 }
                         let slicedGroup = sortedGroup[..<min(5, sortedGroup.count)]
                         slicedGroup.forEach {
+                            self.isBoundingDetected = true
                             let index = $0["index"] as! Int
                             let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
                             let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
