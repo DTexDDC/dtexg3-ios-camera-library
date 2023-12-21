@@ -31,8 +31,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fGc-ih-iai">
-                                <rect key="frame" x="20" y="157" width="335" height="490"/>
+                                <rect key="frame" x="20" y="157" width="335" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="5yV-c2-KEa"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yle-xM-2Eu">
+                                <rect key="frame" x="161" y="477" width="53.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xh7-Ag-Qd6"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,16 +49,18 @@
                             <constraint firstItem="fGc-ih-iai" firstAttribute="top" secondItem="Kge-rK-jso" secondAttribute="bottom" constant="20" id="DIT-rW-ze3"/>
                             <constraint firstItem="Kge-rK-jso" firstAttribute="top" secondItem="ZCO-q9-L0L" secondAttribute="bottom" constant="20" id="FMy-Yg-nAm"/>
                             <constraint firstItem="fGc-ih-iai" firstAttribute="leading" secondItem="xh7-Ag-Qd6" secondAttribute="leading" constant="20" id="Fkq-1Y-kB4"/>
+                            <constraint firstItem="yle-xM-2Eu" firstAttribute="top" secondItem="fGc-ih-iai" secondAttribute="bottom" constant="20" id="Jz7-jy-8Qf"/>
                             <constraint firstItem="ZCO-q9-L0L" firstAttribute="centerX" secondItem="xh7-Ag-Qd6" secondAttribute="centerX" id="MrV-CT-Um4"/>
+                            <constraint firstItem="yle-xM-2Eu" firstAttribute="centerX" secondItem="xh7-Ag-Qd6" secondAttribute="centerX" id="Nss-KF-hHq"/>
                             <constraint firstItem="Kge-rK-jso" firstAttribute="centerX" secondItem="xh7-Ag-Qd6" secondAttribute="centerX" id="Zok-Sw-9El"/>
                             <constraint firstItem="fGc-ih-iai" firstAttribute="centerX" secondItem="xh7-Ag-Qd6" secondAttribute="centerX" id="aKO-lP-Fxx"/>
                             <constraint firstItem="ZCO-q9-L0L" firstAttribute="top" secondItem="xh7-Ag-Qd6" secondAttribute="top" constant="20" id="aeJ-gZ-e4J"/>
-                            <constraint firstItem="xh7-Ag-Qd6" firstAttribute="bottom" secondItem="fGc-ih-iai" secondAttribute="bottom" constant="20" id="stW-KJ-G66"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mnx-bL-h8o"/>
                     <connections>
                         <outlet property="resultImageView" destination="fGc-ih-iai" id="QGm-0Y-ING"/>
+                        <outlet property="resultLabel" destination="yle-xM-2Eu" id="LRi-SH-RJz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -13,8 +13,13 @@ import TensorFlowLite
 import Accelerate
 import CoreMotion
 
+public struct Result {
+    public var photo: UIImage
+    public var isAcceptable: Bool
+}
+
 public protocol DtexCameraViewControllerDelegate: class {
-    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage)
+    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake result: Result)
 }
 
 private let GRAVITY = 9.80665
@@ -471,7 +476,7 @@ extension DtexCameraViewController {
     
     @objc func doneTapped(sender: UIButton) {
         if let image = stillImage {
-            delegate?.dtexCamera(self, didTake: image)
+            delegate?.dtexCamera(self, didTake: Result(photo: image, isAcceptable: lastAcceptable))
         }
         navigationController?.popViewController(animated: true)
     }
