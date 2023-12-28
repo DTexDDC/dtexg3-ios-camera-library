@@ -66,10 +66,15 @@ open class DtexCameraViewController: UIViewController {
     private var acceleration: Double = 0.0
     private var isAcceptable: Bool {
         let orientation = getDeviceOrientation()
-        return orientation == 0 && isBoundingDetected && rotation > 0.5 && acceleration < 0.3
+        return orientation == 0 && isBoundingDetected && rotation > rotationConfidence && acceleration < accelerationLimit
     }
     private var isBoundingDetected = false
     private var lastAcceptable: Bool = false
+    
+    // Config
+    private let detectionConfidence = 0.7
+    private let rotationConfidence = 1.0
+    private let accelerationLimit = 0.3
 
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -302,7 +307,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                         ctx.cgContext.setStrokeColor(UIColor(hex: BOUNDING_COLORS[groupIndex])!.cgColor)
                         
                         let sortedGroup = groupValue
-                            .filter { $0["value"] as! Float32 > 0.1 }
+                            .filter { $0["value"] as! Float32 > Float32(self.detectionConfidence) }
                             .sorted { $0["value"] as! Float32 > $1["value"] as! Float32 }
                         let slicedGroup = sortedGroup[..<min(5, sortedGroup.count)]
                         slicedGroup.forEach {
@@ -421,10 +426,12 @@ extension DtexCameraViewController {
         
         rotationLabel = UILabel()
         view.addSubview(rotationLabel)
+        rotationLabel.isHidden = true
         rotationLabel.translatesAutoresizingMaskIntoConstraints = false
         
         accelerationLabel = UILabel()
         view.addSubview(accelerationLabel)
+        accelerationLabel.isHidden = true
         accelerationLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
