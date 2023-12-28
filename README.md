@@ -21,6 +21,9 @@ pod 'DtexCamera'
 ```
 
 ## Usage
+Step 1. Add the tflite model file to project
+
+Step 2. Update viewcontroller
 ````
 import UIKit
 import DtexCamera
@@ -28,6 +31,7 @@ import DtexCamera
 class ViewController: UIViewController, DtexCameraViewControllerDelegate {
 
     @IBOutlet weak var resultImageView: UIImageView!
+    @IBOutlet weak var resultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +44,14 @@ class ViewController: UIViewController, DtexCameraViewControllerDelegate {
     
     @IBAction func launchCameraTapped(_ sender: Any) {
         let vc = DtexCameraViewController()
+        vc.modelPath = Bundle.main.path(forResource: "modelfilename", ofType: "tflite")
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func dtexCamera(_ dtexCamera: DtexCameraViewController, didTake photo: UIImage) {
-        resultImageView.image = photo
+    func dtexCamera(_ dtexCamera: DtexCamera.DtexCameraViewController, didTake result: DtexCamera.Result) {
+        resultImageView.image = result.photo
+        resultLabel.text = "Status: \(result.isAcceptable ? "Green" : "Red")"
     }
 
 }
