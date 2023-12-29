@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DtexCamera: a0cb3f75d784583c042051b5481371596c6807ad
+  DtexCamera: e052dd75d10a08165fc451762191c9fc5769c98a
   TensorFlowLiteC: 50d75ed3640c15dcfbaf88ca4326297b445e00a1
   TensorFlowLiteSwift: fe99748dc3d58ae08bd2ff38658e3ade7038670f
 

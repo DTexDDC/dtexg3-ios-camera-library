@@ -4,6 +4,7 @@
   "summary": "Dtex Camera Library",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/DTexDDC/dtexg3-ios-camera-library",
+  "readme": "https://github.com/DTexDDC/dtexg3-ios-camera-library/blob/main/README.md",
   "license": {
     "type": "MIT",
     "file": "LICENSE"

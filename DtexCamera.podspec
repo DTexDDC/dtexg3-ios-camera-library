@@ -22,6 +22,7 @@ TODO: Add long description of the pod here.
                        DESC
 
   s.homepage         = 'https://github.com/DTexDDC/dtexg3-ios-camera-library'
+  s.readme           = 'https://github.com/DTexDDC/dtexg3-ios-camera-library/blob/main/README.md'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'wenge8n' => 'wenge8n@outlook.com' }
