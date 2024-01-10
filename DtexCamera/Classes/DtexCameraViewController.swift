@@ -286,7 +286,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             let categories = [Float32](unsafeData: categoriesOutput.data) ?? []
             
             let previewWidth = UIScreen.main.bounds.width
-            let previewHeight = previewWidth * 3 / 4
+            let previewHeight = previewWidth * 4 / 3
             DispatchQueue.main.async {
                 self.isBoundingDetected = false
                 self.canvasImageView.image = nil
