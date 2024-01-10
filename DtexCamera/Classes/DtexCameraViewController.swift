@@ -182,16 +182,18 @@ open class DtexCameraViewController: UIViewController {
         
         // Configure video data output
         videoDataOutput = AVCaptureVideoDataOutput()
-        videoDataOutput.alwaysDiscardsLateVideoFrames = false
+        videoDataOutput.alwaysDiscardsLateVideoFrames = true
         videoDataOutputQueue = DispatchQueue(label: "video output queue")
         videoDataOutput.setSampleBufferDelegate(self, queue: videoDataOutputQueue)
-        let outputSettings: [String: Any] = [String(describing: kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)]
+        let outputSettings: [String: Any] = [String(kCVPixelBufferPixelFormatTypeKey) : kCMPixelFormat_32BGRA]
         videoDataOutput.videoSettings = outputSettings
         guard captureSession.canAddOutput(videoDataOutput) else {
             print("[DtexCamera]: Could not add video data output")
             return
         }
         captureSession.addOutput(videoDataOutput)
+        videoDataOutput.connection(with: .video)?.videoOrientation = .portrait
+        videoDataOutput.connection(with: .video)?.isVideoMirrored = true
         
         captureSession.commitConfiguration()
     }
@@ -199,6 +201,7 @@ open class DtexCameraViewController: UIViewController {
     private func setupPreviewLayer() {
         cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewView.layer.addSublayer(cameraPreviewLayer!)
+        cameraPreviewLayer?.connection?.videoOrientation = .portrait
         cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
     }
     
@@ -250,21 +253,27 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             return
         }
         
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
+        
+        let sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer)
+        assert(sourcePixelFormat == kCVPixelFormatType_32ARGB ||
+          sourcePixelFormat == kCVPixelFormatType_32BGRA || sourcePixelFormat == kCVPixelFormatType_32RGBA)
+        
+        // Crops the image to the biggest square in the center and scales it down to model dimensions.
+        guard let thumbnailPixelBuffer = centerThumbnail(from: pixelBuffer, size: CGSize(width: inputSize, height: inputSize)) else {
+          return
+        }
+        
+        CVPixelBufferLockBaseAddress(thumbnailPixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
         
         do {
             let inputTensor = try modelInterpreter!.input(at: 0)
             
-            // Crops the image to the biggest square in the center and scales it down to model dimensions.
-            let scaledSize = CGSize(width: inputSize, height: inputSize)
-            guard let scaledPixelBuffer = imageBuffer.resized(to: scaledSize) else {
-                return
-            }
-            
-            guard let inputData = rgbDataFromBuffer(
-                scaledPixelBuffer,
+            // Remove the alpha component from the image buffer to get the RGB data.
+            guard let rgbData = rgbDataFromBuffer(
+                thumbnailPixelBuffer,
                 byteCount: 1 * inputSize * inputSize * 3,
                 isModelQuantized: inputTensor.dataType == .uInt8
             ) else {
@@ -273,7 +282,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
             }
             
             // Copy RGB data to input `Tensor`
-            try modelInterpreter!.copy(inputData, toInputAt: 0)
+            try modelInterpreter!.copy(rgbData, toInputAt: 0)
             try modelInterpreter!.invoke()
             let confidenceOutput = try modelInterpreter!.output(at: 0)
             let locationsOutput = try modelInterpreter!.output(at: 1)
