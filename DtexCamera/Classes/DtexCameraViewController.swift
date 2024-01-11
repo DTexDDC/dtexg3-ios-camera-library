@@ -193,7 +193,7 @@ open class DtexCameraViewController: UIViewController {
         }
         captureSession.addOutput(videoDataOutput)
         videoDataOutput.connection(with: .video)?.videoOrientation = .portrait
-        videoDataOutput.connection(with: .video)?.isVideoMirrored = true
+        videoDataOutput.connection(with: .video)?.isVideoMirrored = false
         
         captureSession.commitConfiguration()
     }
