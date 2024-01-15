@@ -12,6 +12,7 @@ import Vision
 import TensorFlowLite
 import Accelerate
 import CoreMotion
+import VideoToolbox
 
 public struct Result {
     public var photo: UIImage
@@ -322,10 +323,11 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                         slicedGroup.forEach {
                             self.isBoundingDetected = true
                             let index = $0["index"] as! Int
+                            let offsetY = (previewHeight - previewWidth) / 2
                             let xmin = CGFloat(boundingBoxes[index]["xmin"]!) * previewWidth
-                            let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewHeight
+                            let ymin = CGFloat(boundingBoxes[index]["ymin"]!) * previewWidth + offsetY
                             let xmax = CGFloat(boundingBoxes[index]["xmax"]!) * previewWidth
-                            let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewHeight
+                            let ymax = CGFloat(boundingBoxes[index]["ymax"]!) * previewWidth + offsetY
                             
                             ctx.cgContext.move(to: CGPoint(x: xmin, y: ymin))
                             ctx.cgContext.addLine(to: CGPoint(x: xmax, y: ymin))
@@ -503,5 +505,18 @@ extension DtexCameraViewController {
         } else {
             detectionStatusView.backgroundColor = .systemRed
         }
+    }
+}
+
+extension UIImage {
+    public convenience init?(pixelBuffer: CVPixelBuffer) {
+        var cgImage: CGImage?
+        VTCreateCGImageFromCVPixelBuffer(pixelBuffer, nil, &cgImage)
+
+        guard let cgImage = cgImage else {
+            return nil
+        }
+
+        self.init(cgImage: cgImage)
     }
 }
