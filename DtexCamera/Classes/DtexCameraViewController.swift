@@ -24,7 +24,7 @@ public protocol DtexCameraViewControllerDelegate: class {
 }
 
 private let GRAVITY = 9.80665
-private let BOUNDING_COLORS = ["#ff4500ff", "#7eda3bff", "#ffff00ff", "#990099ff", "#ff7f50ff"]
+private let BOUNDING_COLORS = ["#ff4500ff", "#ff5414ff", "#ff652bff", "#fa7543ff", "#ff8a5eff", "#fa946eff"]
 
 open class DtexCameraViewController: UIViewController {
     
@@ -74,7 +74,7 @@ open class DtexCameraViewController: UIViewController {
     
     // Config
     private let detectionConfidence = 0.7
-    private let rotationConfidence = 1.0
+    private let rotationConfidence = 1.2
     private let accelerationLimit = 0.3
 
     open override func viewDidLoad() {
