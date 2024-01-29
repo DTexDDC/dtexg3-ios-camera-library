@@ -1,6 +1,6 @@
 {
   "name": "DtexCamera",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "summary": "Dtex Camera Library",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/DTexDDC/dtexg3-ios-camera-library",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/DTexDDC/dtexg3-ios-camera-library.git",
-    "tag": "0.0.2"
+    "tag": "0.0.3"
   },
   "swift_versions": "4.0",
   "platforms": {
