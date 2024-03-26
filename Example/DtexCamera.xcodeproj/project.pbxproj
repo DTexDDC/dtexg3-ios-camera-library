@@ -222,6 +222,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = LYA4U6FUAN;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -505,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DEFF4A2E524E261A2590EA5C /* Pods-DtexCamera_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = LYA4U6FUAN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -527,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A62D82581DC157865D447C6F /* Pods-DtexCamera_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = LYA4U6FUAN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
