@@ -45,6 +45,7 @@ class ViewController: UIViewController, DtexCameraViewControllerDelegate {
     @IBAction func launchCameraTapped(_ sender: Any) {
         let vc = DtexCameraViewController()
         vc.modelPath = Bundle.main.path(forResource: "modelfilename", ofType: "tflite")
+        vc.detectionConfidence = 0.5
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -56,6 +57,16 @@ class ViewController: UIViewController, DtexCameraViewControllerDelegate {
 
 }
 ````
+
+#### Set model path (Required)
+
+````vc.modelPath = Bundle.main.path(forResource: "modelfilename", ofType: "tflite")````
+
+#### Set detection confidence (Optional)
+
+````vc.detectionConfidence = 0.5````
+
+Default confidence value is `0.7`
 
 ## Author
 
