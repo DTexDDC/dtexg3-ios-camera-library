@@ -304,7 +304,7 @@ extension DtexCameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate
                 let image = renderer.image { ctx in
                     ctx.cgContext.setLineWidth(3)
                     let indexedScores = scores.enumerated().map { (index, value) in
-                        return ["index": index, "value": value]
+                        return ["index": index, "value": value] as [String : Any]
                     }
                     let groupedScores = Dictionary(grouping: indexedScores, by: { categories[$0["index"] as! Int] })
                         .map { $0.value }
