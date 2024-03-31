@@ -1,5 +1,5 @@
 PODS:
-  - DtexCamera (0.0.4):
+  - DtexCamera (0.0.5):
     - TensorFlowLiteSwift
   - TensorFlowLiteC (2.7.0):
     - TensorFlowLiteC/Core (= 2.7.0)
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DtexCamera: 5cd77c3cc8c9c8ac3f058ee4d99279c3c491f8dc
+  DtexCamera: afc4035ed2a88e6bbd759f5d5480171e040eb2e1
   TensorFlowLiteC: 50d75ed3640c15dcfbaf88ca4326297b445e00a1
   TensorFlowLiteSwift: fe99748dc3d58ae08bd2ff38658e3ade7038670f
 
