@@ -73,7 +73,7 @@ open class DtexCameraViewController: UIViewController {
     private var lastAcceptable: Bool = false
     
     // Config
-    private let detectionConfidence = 0.7
+    public var detectionConfidence = 0.7
     private let rotationConfidence = 1.2
     private let accelerationLimit = 0.3
 

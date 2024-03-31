@@ -27,6 +27,7 @@ class ViewController: UIViewController, DtexCameraViewControllerDelegate {
     @IBAction func launchCameraTapped(_ sender: Any) {
         let vc = DtexCameraViewController()
         vc.modelPath = Bundle.main.path(forResource: "shelf", ofType: "tflite")
+        vc.detectionConfidence = 0.3
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
